@@ -1,4 +1,4 @@
-%global commit_linux_long  ac51b70ac23a574de24a545de8ed50ef3390cf55
+%global commit_linux_long  135cf7873abb31fa3aba03a347646f53fd25531e
 %global commit_linux_short %(c=%{commit_linux_long}; echo ${c:0:7})
 
 %define Arch arm64
@@ -7,7 +7,7 @@
 %define debug_package %{nil}
 
 Name:           rock64-kernel
-Version:        4.4.120
+Version:        4.4.126
 Release:        %{extra_version}%{?dist}
 BuildArch:	noarch
 Summary:        Specific kernel for Rock64
@@ -124,6 +124,9 @@ cp $(ls -1d /usr/share/%{name}-kernel/*-*/|tail -1)/boot/rk3328-rock64.dtb /boot
 
 
 %changelog
+* Mon May 28 2018 Jacco Ligthart <jacco@redsleeve.org> - 4.4.126-1.el7
+- update to latest git
+
 * Tue Apr 03 2018 Jacco Ligthart <jacco@redsleeve.org> - 4.4.120-1.el7
 - update to latest git
 
