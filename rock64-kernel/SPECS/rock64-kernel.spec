@@ -1,13 +1,13 @@
-%global commit_linux_long  b086cfdc8327f0239f82a5edba1a09a08b1d72ea
+%global commit_linux_long  6f266fb5d677365c7fa9f42ce40dd40ad5f92845
 %global commit_linux_short %(c=%{commit_linux_long}; echo ${c:0:7})
 
 %define Arch arm64
-%define extra_version 2
+%define extra_version 1
 %define _binaries_in_noarch_packages_terminate_build 0
 %define debug_package %{nil}
 
 Name:           rock64-kernel
-Version:        4.4.132
+Version:        4.4.167
 Release:        %{extra_version}%{?dist}
 BuildArch:	noarch
 Summary:        Specific kernel for Rock64
@@ -103,7 +103,7 @@ ln -T -s build %{buildroot}/lib/modules/%{version}-%{release}/source --force
 %attr(0755,root,root) /boot/Image-%{version}-%{release}
 %doc /boot/COPYING.linux
 
-%post
+%posttrans
 cp /boot/Image-%{version}-%{release} /boot/Image
 cp /usr/share/%{name}-kernel/%{version}-%{release}/boot/rk3328-rock64.dtb /boot/dtb
 /usr/sbin/depmod -a %{version}-%{release}
@@ -114,8 +114,8 @@ cp /boot/initrd.img-%{version}-%{release} /boot/initrd.img
 rm -f /boot/initrd.img-%{version}-%{release}
 
 %postun
-cp $(ls -1 /boot/Image-*-*|tail -1) /boot/Image
-cp $(ls -1d /usr/share/%{name}-kernel/*-*/|tail -1)/boot/rk3328-rock64.dtb /boot/dtb
+cp $(ls -1 /boot/Image-*-*|sort -V|tail -1) /boot/Image
+cp $(ls -1d /usr/share/%{name}-kernel/*-*/|sort -V|tail -1)/boot/rk3328-rock64.dtb /boot/dtb
 
 
 %files devel
@@ -124,6 +124,9 @@ cp $(ls -1d /usr/share/%{name}-kernel/*-*/|tail -1)/boot/rk3328-rock64.dtb /boot
 
 
 %changelog
+* Thu Mar 14 2019 Jacco Ligthart <jacco@redsleeve.org> - 4.4.167-1.el7
+- updated to 4.4.167
+
 * Fri Jun 15 2018 Jacco Ligthart <jacco@redsleeve.org> - 4.4.132-2.el7
 - update to latest git, which is now 'release' version in stead of 'pre-release'
 
