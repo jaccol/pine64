@@ -1,8 +1,8 @@
-%global commit_linux_long  cbaf63b5f6c15e8079c5d43bcc7dc0d3e8c0ef80
+%global commit_linux_long  b086cfdc8327f0239f82a5edba1a09a08b1d72ea
 %global commit_linux_short %(c=%{commit_linux_long}; echo ${c:0:7})
 
 %define Arch arm64
-%define extra_version 1
+%define extra_version 2
 %define _binaries_in_noarch_packages_terminate_build 0
 %define debug_package %{nil}
 
@@ -124,6 +124,9 @@ cp $(ls -1d /usr/share/%{name}-kernel/*-*/|tail -1)/boot/rk3328-rock64.dtb /boot
 
 
 %changelog
+* Fri Jun 15 2018 Jacco Ligthart <jacco@redsleeve.org> - 4.4.132-2.el7
+- update to latest git, which is now 'release' version in stead of 'pre-release'
+
 * Fri Jun 15 2018 Jacco Ligthart <jacco@redsleeve.org> - 4.4.132-1.el7
 - update to latest git
 
